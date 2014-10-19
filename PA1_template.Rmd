@@ -7,16 +7,55 @@ output:
 
 
 ## Loading and preprocessing the data
+**1.unzip and loading data**
+
+**2.making data$date to format class Date**
+
+```{r}
+# unzip and loading data
+unzip("activity.zip")
+data<-read.csv("activity.csv")
+#for seeing
+head(data)
+#and it's structure
+str(data)
 
 
+#preprocessing data
 
+ 
+data$date<-as.Date(data$date)
+
+#finally it's structure
+str(data)
+```
 ## What is mean total number of steps taken per day?
 
-
+```{r}
+total_steps<-aggregate(steps~date,data,sum)
+#seeing mean_steps
+print(total_steps)
+#histogram
+hist(total_steps$steps,col="green",xlab="steps",main="total steps by day")
+#it's mean
+mean(total_steps$steps,na.rm=T)
+#or summary
+summary(total_steps)
+```
 
 ## What is the average daily activity pattern?
 
 
+```{r}
+mean_steps<-aggregate(steps~interval,data,mean)
+#seeing head
+head(mean_steps)
+#seeing tail
+tail(mean_steps)
+#ploting
+plot(mean_steps$steps~mean_steps$interval,type="l",col="green",xlab="interval",ylab="steps",main="meanps by day")
+
+```
 
 ## Imputing missing values
 
