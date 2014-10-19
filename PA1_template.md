@@ -136,7 +136,7 @@ mean(total_steps$steps,na.rm=T)
 ```
 
 ```r
-#or summary
+#or median
 median(total_steps$steps,na.rm=T)
 ```
 
@@ -209,4 +209,23 @@ sum(!complete.cases(data))
 ```
 ## [1] 2304
 ```
-## Are there differences in activity patterns between weekdays and weekends?
+## Are there differences in activity patterns between weekdays and  ?
+
+```r
+days <- weekdays(data$date)
+data$day_type <- ifelse(days == "Samedi" | days == "Dimanche", 
+                                "Weekend", "Weekday")
+data$day_type<-as.factor(data$day_type)
+week_data<-aggregate(interval~steps + day_type,data,mean)
+head(week_data)
+```
+
+```
+##   steps day_type interval
+## 1     0  Weekday     1121
+## 2     1  Weekday     1149
+## 3     2  Weekday     1540
+## 4     3  Weekday     1298
+## 5     4  Weekday     1074
+## 6     5  Weekday     1241
+```

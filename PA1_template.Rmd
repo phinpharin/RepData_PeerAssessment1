@@ -69,4 +69,14 @@ interval_of_max
 sum(!complete.cases(data))
 
 ```
-## Are there differences in activity patterns between weekdays and weekends?
+## Are there differences in activity patterns between weekdays and  ?
+```{r}
+
+days <- weekdays(data$date)
+data$day_type <- ifelse(days == "Samedi" | days == "Dimanche", 
+                                "Weekend", "Weekday")
+data$day_type<-as.factor(data$day_type)
+week_data<-aggregate(interval~steps + day_type,data,mean)
+head(week_data)
+
+```

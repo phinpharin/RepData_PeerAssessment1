@@ -154,7 +154,7 @@ hist(total_steps$steps,col=&quot;green&quot;,xlab=&quot;steps&quot;,main=&quot;t
 <pre class="r"><code>#it's mean
 mean(total_steps$steps,na.rm=T)</code></pre>
 <pre><code>## [1] 10766</code></pre>
-<pre class="r"><code>#or summary
+<pre class="r"><code>#or median
 median(total_steps$steps,na.rm=T)</code></pre>
 <pre><code>## [1] 10765</code></pre>
 </div>
@@ -196,8 +196,21 @@ interval_of_max</code></pre>
 sum(!complete.cases(data))</code></pre>
 <pre><code>## [1] 2304</code></pre>
 </div>
-<div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
-<h2>Are there differences in activity patterns between weekdays and weekends?</h2>
+<div id="are-there-differences-in-activity-patterns-between-weekdays-and" class="section level2">
+<h2>Are there differences in activity patterns between weekdays and ?</h2>
+<pre class="r"><code>days &lt;- weekdays(data$date)
+data$day_type &lt;- ifelse(days == &quot;Samedi&quot; | days == &quot;Dimanche&quot;, 
+                                &quot;Weekend&quot;, &quot;Weekday&quot;)
+data$day_type&lt;-as.factor(data$day_type)
+week_data&lt;-aggregate(interval~steps + day_type,data,mean)
+head(week_data)</code></pre>
+<pre><code>##   steps day_type interval
+## 1     0  Weekday     1121
+## 2     1  Weekday     1149
+## 3     2  Weekday     1540
+## 4     3  Weekday     1298
+## 5     4  Weekday     1074
+## 6     5  Weekday     1241</code></pre>
 </div>
 
 
