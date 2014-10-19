@@ -137,17 +137,11 @@ mean(total_steps$steps,na.rm=T)
 
 ```r
 #or summary
-summary(total_steps)
+median(total_steps$steps,na.rm=T)
 ```
 
 ```
-##       date                steps      
-##  Min.   :2012-10-02   Min.   :   41  
-##  1st Qu.:2012-10-16   1st Qu.: 8841  
-##  Median :2012-10-29   Median :10765  
-##  Mean   :2012-10-30   Mean   :10766  
-##  3rd Qu.:2012-11-16   3rd Qu.:13294  
-##  Max.   :2012-11-29   Max.   :21194
+## [1] 10765
 ```
 
 ## What is the average daily activity pattern?
@@ -187,13 +181,32 @@ tail(mean_steps)
 
 ```r
 #ploting
-plot(mean_steps$steps~mean_steps$interval,type="l",col="green",xlab="interval",ylab="steps",main="meanps by day")
+plot(mean_steps$steps~mean_steps$interval,type="l",col="green",xlab="interval",ylab="steps",main="mean steps by day")
 ```
 
 ![plot of chunk unnamed-chunk-3](./PA1_template_files/figure-html/unnamed-chunk-3.png) 
 
+```r
+#2. Which 5-minute interval, on average across all the days in the #dataset, contains the maximum number
+#of steps?
+n_steps_max <- which.max(mean_steps$steps)
+interval_of_max <- mean_steps$interval[n_steps_max]
+interval_of_max
+```
+
+```
+## [1] 835
+```
+
 ## Imputing missing values
 
+```r
+#1. Calculate and report the total number of missing values in the #dataset (i.e. the total number of rows with
+#NA s)
+sum(!complete.cases(data))
+```
 
-
+```
+## [1] 2304
+```
 ## Are there differences in activity patterns between weekdays and weekends?

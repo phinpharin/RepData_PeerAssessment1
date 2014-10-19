@@ -39,8 +39,8 @@ print(total_steps)
 hist(total_steps$steps,col="green",xlab="steps",main="total steps by day")
 #it's mean
 mean(total_steps$steps,na.rm=T)
-#or summary
-summary(total_steps)
+#or median
+median(total_steps$steps,na.rm=T)
 ```
 
 ## What is the average daily activity pattern?
@@ -53,12 +53,20 @@ head(mean_steps)
 #seeing tail
 tail(mean_steps)
 #ploting
-plot(mean_steps$steps~mean_steps$interval,type="l",col="green",xlab="interval",ylab="steps",main="meanps by day")
+plot(mean_steps$steps~mean_steps$interval,type="l",col="green",xlab="interval",ylab="steps",main="mean steps by day")
 
+#2. Which 5-minute interval, on average across all the days in the #dataset, contains the maximum number
+#of steps?
+n_steps_max <- which.max(mean_steps$steps)
+interval_of_max <- mean_steps$interval[n_steps_max]
+interval_of_max
 ```
 
 ## Imputing missing values
+```{r}
+#1. Calculate and report the total number of missing values in the #dataset (i.e. the total number of rows with
+#NA s)
+sum(!complete.cases(data))
 
-
-
+```
 ## Are there differences in activity patterns between weekdays and weekends?
